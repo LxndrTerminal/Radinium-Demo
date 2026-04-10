@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "a2aWYbzTDGI=",
+  "success": true,
+  "projectFilePath": "/home/tollavdmerwe/Coding/C#/BlazorHelloWorld/BlazorHelloWorld.csproj",
+  "expectedPackageFiles": [
+    "/home/tollavdmerwe/.nuget/packages/microsoft.aspnetcore.app.internal.assets/10.0.5/microsoft.aspnetcore.app.internal.assets.10.0.5.nupkg.sha512",
+    "/home/tollavdmerwe/.nuget/packages/microsoft.aspnetcore.components.quickgrid/10.0.5/microsoft.aspnetcore.components.quickgrid.10.0.5.nupkg.sha512"
+  ],
+  "logs": []
+}

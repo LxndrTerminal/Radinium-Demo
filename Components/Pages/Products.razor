@@ -1,0 +1,60 @@
+@page "/products"
+@rendermode InteractiveServer
+@inject ApiClient Api 
+@inject NavigationManager Navigation
+@using Microsoft.AspNetCore.Components.QuickGrid
+
+Products
+
+<p><button @onclick="NavigateToCreate">Create</button></p>
+
+<p>This is da Products</p>
+
+@if (products is null)
+{
+    <p><em>Loading...</em></p>
+}
+else if (products.Length == 0)
+{
+    <p>No products.</p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Description</th>
+                <th>Display Name</th>
+                <th>License Template ID</th>
+                <th>Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (int i = 0; i < products.Length; i++)
+            {
+                var p = products[i];
+                <tr>
+                    <td>@p.description</td>
+                    <td>@p.displayName</td>
+                    <td>@p.licenseTemplateId</td>
+                    <td>@p.name</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+
+@code {
+
+    private Product[]? products;
+
+    protected override async Task OnInitializedAsync()
+    {
+        products = await Api.GetJsonAsync<Product[]>("v3/products");
+	
+	Console.WriteLine(typeof(Product[]));
+    }
+
+    private void NavigateToCreate() => Navigation.NavigateTo("createproductform");
+}
