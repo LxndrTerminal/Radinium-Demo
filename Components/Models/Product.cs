@@ -9,7 +9,6 @@ namespace BlazorHelloWorld.Components.Models
         public string description { get; set; }
         [Required]
 	public string displayName { get; set; }
-        [Required]
 	public string licenseTemplateId { get; set; }
 	[Required]
 	public string name { get; set; }

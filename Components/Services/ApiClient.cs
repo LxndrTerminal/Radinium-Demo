@@ -19,4 +19,15 @@ public class ApiClient
         await using var stream = await res.Content.ReadAsStreamAsync(ct);
         return await System.Text.Json.JsonSerializer.DeserializeAsync<T>(stream, new System.Text.Json.JsonSerializerOptions { PropertyNameCaseInsensitive = true }, ct);
     }
+    
+
+    public record ApiResult(System.Net.HttpStatusCode StatusCode, bool IsSuccess, string Content);
+
+    public async Task<ApiResult> PostJsonAsync<TRequest>(string uri, TRequest payload, CancellationToken ct = default)
+    {
+        using var res = await Client().PostAsJsonAsync(uri, payload, ct);
+        var content = await res.Content.ReadAsStringAsync(ct);
+        return new ApiResult(res.StatusCode, res.IsSuccessStatusCode, content);
+    }
+ 
 }
