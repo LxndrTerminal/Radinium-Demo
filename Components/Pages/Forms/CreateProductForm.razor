@@ -4,19 +4,19 @@
 @inject NavigationManager Navigation
 @inject ApiClient Api
 
-<EditForm Model="Model" OnValidSubmit="Submit" FormName="CreateProduct">
+<EditForm Model="prodModel" OnValidSubmit="Submit" FormName="CreateProduct">
     <DataAnnotationsValidator />
     <ValidationSummary />
     <label>
         Description: 
-        <InputText @bind-Value="Model!.description" />
+        <InputText @bind-Value="prodModel!.description" />
     </label>
     <label>
         Display Name:
-        <InputText @bind-Value="Model!.displayName" />
+        <InputText @bind-Value="prodModel!.displayName" />
     </label>
     <label>
-    <InputSelect class="form-select" @bind-Value="Model!.licenseTemplateId">
+    <InputSelect class="form-select" @bind-Value="prodModel!.licenseTemplateId">
 	@if (licenseTemplates is null)
 	{
 	<option selected value="">None</option>
@@ -31,7 +31,7 @@
 </label>
     <label>
         Name:
-        <InputText @bind-Value="Model!.name" />
+        <InputText @bind-Value="prodModel!.name" />
     </label>
     <button type="submit">Submit</button>
     <button type="button" class="btn btn-secondary" @onclick="Cancel">Cancel</button>
@@ -39,7 +39,7 @@
 
 @code {
 
-    private Product? Model { get; set; } = new();
+    private Product? prodModel { get; set; } = new();
     
     private LicenseTemplate[]? licenseTemplates { get; set; }
 
@@ -47,23 +47,22 @@
 
 	 licenseTemplates = await Api.GetJsonAsync<LicenseTemplate[]>("v3/license-templates");
 	 if (licenseTemplates?.Length > 0){
-	 Model.licenseTemplateId = licenseTemplates[0].id;
+	 prodModel.licenseTemplateId = licenseTemplates[0].id;
 	 } 
     }
     private async Task Submit()
     {
-	Console.WriteLine("Da Name: ", Model!.name);
-	Console.WriteLine("Da License Template selected:", Model!.licenseTemplateId);
 	// send and deserialize JSON response
-	// var response = await Api.PostJsonAsync("v3/products", Model);
-	// if (response.IsSuccess)
-	// {
-	//    Console.WriteLine("Success");
-	// }
-	// else
-	// {
-	//    Console.WriteLine(response.Content);
-	// }
+	 var response = await Api.PostJsonAsync("v3/products", prodModel);
+	 if (response.IsSuccess)
+	 {
+	    Navigation.NavigateTo("products");
+	 }
+	 else
+	 {
+	   // error handling
+	    Console.WriteLine(response.Content);
+	 }
     }
 
    

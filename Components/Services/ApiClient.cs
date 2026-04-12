@@ -29,5 +29,13 @@ public class ApiClient
         var content = await res.Content.ReadAsStringAsync(ct);
         return new ApiResult(res.StatusCode, res.IsSuccessStatusCode, content);
     }
+
+
+    public async Task<ApiResult> DeleteAsAsync(string uri, CancellationToken ct = default)
+    {
+	using var res = await Client().DeleteAsync(uri, ct);
+	var content = await res.Content.ReadAsStringAsync(ct);
+	return new ApiResult(res.StatusCode, res.IsSuccessStatusCode, content);
+    }
  
 }

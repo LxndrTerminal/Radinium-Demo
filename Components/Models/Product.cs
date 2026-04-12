@@ -5,6 +5,7 @@ namespace BlazorHelloWorld.Components.Models
 {
     public class Product
     {
+	public string? id {get; set; }
 	[Required]
         public string description { get; set; }
         [Required]

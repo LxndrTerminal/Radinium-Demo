@@ -3,6 +3,7 @@
 @inject ApiClient Api 
 @inject NavigationManager Navigation
 @using Microsoft.AspNetCore.Components.QuickGrid
+@inject IJSRuntime JsRuntime
 
 Products
 
@@ -23,10 +24,12 @@ else
     <table class="table">
         <thead>
             <tr>
+		<th>ID</th>
                 <th>Description</th>
                 <th>Display Name</th>
                 <th>License Template ID</th>
                 <th>Name</th>
+		<th>Action</th>
             </tr>
         </thead>
         <tbody>
@@ -34,10 +37,12 @@ else
             {
                 var p = products[i];
                 <tr>
+		    <td>@p.id</td>
                     <td>@p.description</td>
                     <td>@p.displayName</td>
                     <td>@p.licenseTemplateId</td>
                     <td>@p.name</td>
+		    <td><button @onclick="() => DeleteProduct(p)">Delete</button></td>
                 </tr>
             }
         </tbody>
@@ -53,6 +58,16 @@ else
     {
         products = await Api.GetJsonAsync<Product[]>("v3/products");
 	
+    }
+
+    private async Task DeleteProduct(Product p)
+    {
+        bool confirmed = await JsRuntime.InvokeAsync<bool>("confirm", "Are you sure?");
+	if (confirmed)
+	{
+	    var res = await Api.DeleteAsAsync($"v3/products/{p.id!}");
+	    Navigation.NavigateTo(Navigation.Uri, forceLoad: true);
+	}
     }
 
     private void NavigateToCreate() => Navigation.NavigateTo("createproductform");
