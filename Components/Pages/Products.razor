@@ -2,8 +2,9 @@
 @rendermode InteractiveServer
 @inject ApiClient Api 
 @inject NavigationManager Navigation
-@using Microsoft.AspNetCore.Components.QuickGrid
 @inject IJSRuntime JsRuntime
+@inject PropChecker PropChecker
+@using BlazorHelloWorld.Components.Models
 
 Products
 
@@ -43,6 +44,41 @@ else
                     <td>@p.licenseTemplateId</td>
                     <td>@p.name</td>
 		    <td><button @onclick="() => DeleteProduct(p)">Delete</button></td>
+		    <td><button @onclick="() => CreateLicense(p)">License</button></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+Licenses
+<p>This is da Licenses</p>
+
+@if (licenses is null)
+{
+    <p><em>Loading...</em></p>
+}
+else if (licenses.Length == 0)
+{
+    <p>No licensess.</p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+		<th>ID</th>
+                <th>Product ID</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (int i = 0; i < licenses.Length; i++)
+            {
+                var l = licenses[i];
+                <tr>
+		    <td>@l.id</td>
+                    <td>@l.productId</td>
+		    <td><button @onclick="() => DeleteLicense(l)">Delete</button></td>
                 </tr>
             }
         </tbody>
@@ -54,10 +90,12 @@ else
 
     private Product[]? products;
 
+    private BlazorHelloWorld.Components.Models.License[]? licenses;
+
     protected override async Task OnInitializedAsync()
     {
         products = await Api.GetJsonAsync<Product[]>("v3/products");
-	
+	licenses = await Api.GetJsonAsync<BlazorHelloWorld.Components.Models.License[]>("v3/licenses");
     }
 
     private async Task DeleteProduct(Product p)
@@ -67,6 +105,44 @@ else
 	{
 	    var res = await Api.DeleteAsAsync($"v3/products/{p.id!}");
 	    Navigation.NavigateTo(Navigation.Uri, forceLoad: true);
+	}
+    }
+
+    private async Task DeleteLicense(BlazorHelloWorld.Components.Models.License l)
+    {
+	bool confirmed = await JsRuntime.InvokeAsync<bool>("confirm", "Are you sure?");
+	if(confirmed)
+	{
+	   var res = await Api.DeleteAsAsync($"v3/licenses/{l.id}");
+	    Navigation.NavigateTo(Navigation.Uri, forceLoad: true);
+	 }
+    }
+
+    public class ProdID {
+	public string? productId {get; set;}
+    }
+
+
+    private async Task CreateLicense(Product p)
+    {
+
+	bool confirmed = await JsRuntime.InvokeAsync<bool>("confirm", $"Create new license for {p.name}");
+	
+	if(confirmed)
+	{
+		var ProductID = new ProdID() { productId = p.id};
+
+		// send and deserialize JSON response
+		 var response = await Api.PostJsonAsync("v3/licenses", ProductID);
+		 if (response.IsSuccess)
+		 {
+		    Navigation.NavigateTo(Navigation.Uri, forceLoad: true);
+		 }
+		 else
+		 {
+		   // error handling
+		    Console.WriteLine(response.Content);
+		 }
 	}
     }
 

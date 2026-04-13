@@ -22,6 +22,7 @@ builder.Services.AddHttpClient("ApiClient", c =>
 });
 builder.Services.AddScoped<ApiClient>();
 
+builder.Services.AddScoped<PropChecker>();
 
 var app = builder.Build();
 
