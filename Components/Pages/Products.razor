@@ -3,10 +3,11 @@
 @inject ApiClient Api 
 @inject NavigationManager Navigation
 @inject IJSRuntime JsRuntime
-@inject PropChecker PropChecker
 @using BlazorHelloWorld.Components.Models
+@inject LicenseService LicenseService
 
-Products
+
+<h1>Products</h1>
 
 <p><button @onclick="NavigateToCreate">Create</button></p>
 
@@ -51,7 +52,7 @@ else
     </table>
 }
 
-Licenses
+<h1>Licenses</h1>
 <p>This is da Licenses</p>
 
 @if (licenses is null)
@@ -67,6 +68,7 @@ else
     <table class="table">
         <thead>
             <tr>
+		<th>License Key</th>
 		<th>ID</th>
                 <th>Product ID</th>
             </tr>
@@ -76,15 +78,53 @@ else
             {
                 var l = licenses[i];
                 <tr>
+		    <td>@l.key</td>
 		    <td>@l.id</td>
                     <td>@l.productId</td>
-		    <td><button @onclick="() => DeleteLicense(l)">Delete</button></td>
+		    <td><button @onclick="() => DeleteLicense(l)">Delete</button><button @onclick="() => ActivateLicense(l)">Activate</button></td>
                 </tr>
             }
         </tbody>
     </table>
 }
 
+<h1>Activations</h1>
+<p>This is da Activations</p>
+
+@if (activations is null)
+{
+    <p><em>Loading...</em></p>
+}
+else if (activations.Length == 0)
+{
+    <p>No Activationss.</p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+		<th>Created At</th>
+		<th>Operating System</th>
+                <th>Product ID</th>
+		<th>License Key</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (int i = 0; i < activations.Length; i++)
+            {
+                var a = activations[i];
+                <tr>
+		    <td>@a.createdAt</td>
+		    <td>@a.os</td>
+                    <td>@a.productId</td>
+		    <td>@a.licenseId</td>
+		    <td><button @onclick="() => DeleteActivation(a)">Delete</button></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
 
 @code {
 
@@ -92,11 +132,17 @@ else
 
     private BlazorHelloWorld.Components.Models.License[]? licenses;
 
+    private BlazorHelloWorld.Components.Models.Activation[]? activations;
+
     protected override async Task OnInitializedAsync()
     {
-        products = await Api.GetJsonAsync<Product[]>("v3/products");
+	products = await Api.GetJsonAsync<Product[]>("v3/products");
 	licenses = await Api.GetJsonAsync<BlazorHelloWorld.Components.Models.License[]>("v3/licenses");
+	activations = await Api.GetJsonAsync<BlazorHelloWorld.Components.Models.Activation[]>("v3/activations");
+
     }
+
+   
 
     private async Task DeleteProduct(Product p)
     {
@@ -117,6 +163,16 @@ else
 	    Navigation.NavigateTo(Navigation.Uri, forceLoad: true);
 	 }
     }
+
+    private async Task DeleteActivation(BlazorHelloWorld.Components.Models.Activation a)
+    {
+	bool confirmed = await JsRuntime.InvokeAsync<bool>("confirm", "Are you sure?");
+	if(confirmed)
+	{
+	   var res = await Api.DeleteAsAsync($"v3/Activations/{a.id}");
+	    Navigation.NavigateTo(Navigation.Uri, forceLoad: true);
+	 }
+    }    
 
     public class ProdID {
 	public string? productId {get; set;}
@@ -144,6 +200,38 @@ else
 		    Console.WriteLine(response.Content);
 		 }
 	}
+    }
+
+    private async Task ActivateLicense(BlazorHelloWorld.Components.Models.License l)
+    {
+	    try
+	    {
+	        // Fetch the product.dat content as a string
+	        var productData = await Api.GetProductDataAsync(l.productId);
+		bool success = LicenseService.ActivateLicense(
+		l.productId,
+		l.key,
+		productData
+		);
+
+	        if (success)
+	        {
+	            // Activation successful
+		    Navigation.NavigateTo(Navigation.Uri, forceLoad: true);
+	        }
+	        else
+	        {
+	            // Activation failed
+	        }
+	    }
+	    catch (LexActivatorException ex)
+	    {
+	        // handle error
+	    }
+	    catch (Exception ex)
+	    {
+	        // handle other errors (e.g., HTTP request failure)
+	    }
     }
 
     private void NavigateToCreate() => Navigation.NavigateTo("createproductform");

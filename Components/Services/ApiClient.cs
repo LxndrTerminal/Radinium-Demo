@@ -7,7 +7,7 @@ public class ApiClient
     private HttpClient Client()
     {
         var c = _factory.CreateClient("ApiClient");
-        if (!string.IsNullOrEmpty(_auth?.AccessToken))
+        if (!String.IsNullOrEmpty(_auth.AccessToken))
             c.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", _auth.AccessToken);
         return c;
     }
@@ -20,6 +20,12 @@ public class ApiClient
         return await System.Text.Json.JsonSerializer.DeserializeAsync<T>(stream, new System.Text.Json.JsonSerializerOptions { PropertyNameCaseInsensitive = true }, ct);
     }
     
+    public async Task<string> GetProductDataAsync(string productId, CancellationToken ct = default)
+    {
+	using var res = await Client().GetAsync($"v3/products/{productId}/product.dat", ct);
+	res.EnsureSuccessStatusCode();
+	return await res.Content.ReadAsStringAsync(ct);
+    }
 
     public record ApiResult(System.Net.HttpStatusCode StatusCode, bool IsSuccess, string Content);
 

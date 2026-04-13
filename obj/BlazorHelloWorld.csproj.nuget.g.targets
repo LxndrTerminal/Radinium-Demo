@@ -2,5 +2,6 @@
 <Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ImportGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
     <Import Project="$(NuGetPackageRoot)microsoft.aspnetcore.app.internal.assets/10.0.5/buildTransitive/Microsoft.AspNetCore.App.Internal.Assets.targets" Condition="Exists('$(NuGetPackageRoot)microsoft.aspnetcore.app.internal.assets/10.0.5/buildTransitive/Microsoft.AspNetCore.App.Internal.Assets.targets')" />
+    <Import Project="$(NuGetPackageRoot)cryptlex.lexactivator/3.41.0/build/Cryptlex.LexActivator.targets" Condition="Exists('$(NuGetPackageRoot)cryptlex.lexactivator/3.41.0/build/Cryptlex.LexActivator.targets')" />
   </ImportGroup>
 </Project>

@@ -2,6 +2,68 @@
   "version": 3,
   "targets": {
     "net10.0": {
+      "Cryptlex.LexActivator/3.41.0": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/Cryptlex.LexActivator.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/Cryptlex.LexActivator.dll": {
+            "related": ".xml"
+          }
+        },
+        "build": {
+          "build/Cryptlex.LexActivator.targets": {}
+        },
+        "runtimeTargets": {
+          "runtimes/linux-arm/native/libLexActivator.so": {
+            "assetType": "native",
+            "rid": "linux-arm"
+          },
+          "runtimes/linux-arm64/native/libLexActivator.so": {
+            "assetType": "native",
+            "rid": "linux-arm64"
+          },
+          "runtimes/linux-musl-arm/native/libLexActivator.so": {
+            "assetType": "native",
+            "rid": "linux-musl-arm"
+          },
+          "runtimes/linux-musl-arm64/native/libLexActivator.so": {
+            "assetType": "native",
+            "rid": "linux-musl-arm64"
+          },
+          "runtimes/linux-musl-x64/native/libLexActivator.so": {
+            "assetType": "native",
+            "rid": "linux-musl-x64"
+          },
+          "runtimes/linux-x64/native/libLexActivator.so": {
+            "assetType": "native",
+            "rid": "linux-x64"
+          },
+          "runtimes/osx-arm64/native/libLexActivator.dylib": {
+            "assetType": "native",
+            "rid": "osx-arm64"
+          },
+          "runtimes/osx-x64/native/libLexActivator.dylib": {
+            "assetType": "native",
+            "rid": "osx-x64"
+          },
+          "runtimes/win-arm64/native/LexActivator.dll": {
+            "assetType": "native",
+            "rid": "win-arm64"
+          },
+          "runtimes/win-x64/native/LexActivator.dll": {
+            "assetType": "native",
+            "rid": "win-x64"
+          },
+          "runtimes/win-x86/native/LexActivator32.dll": {
+            "assetType": "native",
+            "rid": "win-x86"
+          }
+        }
+      },
       "Microsoft.AspNetCore.App.Internal.Assets/10.0.5": {
         "type": "package",
         "build": {
@@ -34,6 +96,38 @@
     }
   },
   "libraries": {
+    "Cryptlex.LexActivator/3.41.0": {
+      "sha512": "CUqLmNOnF1QXFpYrX3CDWS3ZW0J5DacRgSULl3pKqrwDqDlcL9oX9Ycq6n1JB/9g0EjGfSA8C7tPKKlVDti+oQ==",
+      "type": "package",
+      "path": "cryptlex.lexactivator/3.41.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.md",
+        "THIRD-PARTY-NOTICES.txt",
+        "build/Cryptlex.LexActivator.targets",
+        "cryptlex.lexactivator.3.41.0.nupkg.sha512",
+        "cryptlex.lexactivator.nuspec",
+        "lib/net45/Cryptlex.LexActivator.dll",
+        "lib/net45/Cryptlex.LexActivator.xml",
+        "lib/netstandard1.1/Cryptlex.LexActivator.dll",
+        "lib/netstandard1.1/Cryptlex.LexActivator.xml",
+        "lib/netstandard2.0/Cryptlex.LexActivator.dll",
+        "lib/netstandard2.0/Cryptlex.LexActivator.xml",
+        "runtimes/THIRD-PARTY-NOTICES.txt",
+        "runtimes/linux-arm/native/libLexActivator.so",
+        "runtimes/linux-arm64/native/libLexActivator.so",
+        "runtimes/linux-musl-arm/native/libLexActivator.so",
+        "runtimes/linux-musl-arm64/native/libLexActivator.so",
+        "runtimes/linux-musl-x64/native/libLexActivator.so",
+        "runtimes/linux-x64/native/libLexActivator.so",
+        "runtimes/osx-arm64/native/libLexActivator.dylib",
+        "runtimes/osx-x64/native/libLexActivator.dylib",
+        "runtimes/win-arm64/native/LexActivator.dll",
+        "runtimes/win-x64/native/LexActivator.dll",
+        "runtimes/win-x86/native/LexActivator32.dll"
+      ]
+    },
     "Microsoft.AspNetCore.App.Internal.Assets/10.0.5": {
       "sha512": "Oxw9Ps1/nd6c/EMCAI13AeJFEqXezAvCEOshMjUWmL7LeGirHJNzytR2e/3jINYg0j2TmPvNUowGHf+gp8zDSQ==",
       "type": "package",
@@ -83,6 +177,7 @@
   },
   "projectFileDependencyGroups": {
     "net10.0": [
+      "Cryptlex.LexActivator >= 3.41.0",
       "Microsoft.AspNetCore.App.Internal.Assets >= 10.0.5",
       "Microsoft.AspNetCore.Components.QuickGrid >= 10.0.5"
     ]
@@ -130,6 +225,10 @@
       "net10.0": {
         "targetAlias": "net10.0",
         "dependencies": {
+          "Cryptlex.LexActivator": {
+            "target": "Package",
+            "version": "[3.41.0, )"
+          },
           "Microsoft.AspNetCore.App.Internal.Assets": {
             "suppressParent": "All",
             "target": "Package",

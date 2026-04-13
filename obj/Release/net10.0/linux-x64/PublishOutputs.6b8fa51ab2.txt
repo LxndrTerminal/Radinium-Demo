@@ -1,0 +1,10 @@
+/home/tollavdmerwe/Coding/C#/BlazorHelloWorld/bin/Release/net10.0/linux-x64/publish/BlazorHelloWorld
+/home/tollavdmerwe/Coding/C#/BlazorHelloWorld/bin/Release/net10.0/linux-x64/publish/appsettings.Development.json
+/home/tollavdmerwe/Coding/C#/BlazorHelloWorld/bin/Release/net10.0/linux-x64/publish/appsettings.json
+/home/tollavdmerwe/Coding/C#/BlazorHelloWorld/bin/Release/net10.0/linux-x64/publish/BlazorHelloWorld.dll
+/home/tollavdmerwe/Coding/C#/BlazorHelloWorld/bin/Release/net10.0/linux-x64/publish/BlazorHelloWorld.runtimeconfig.json
+/home/tollavdmerwe/Coding/C#/BlazorHelloWorld/bin/Release/net10.0/linux-x64/publish/BlazorHelloWorld.pdb
+/home/tollavdmerwe/Coding/C#/BlazorHelloWorld/bin/Release/net10.0/linux-x64/publish/Cryptlex.LexActivator.dll
+/home/tollavdmerwe/Coding/C#/BlazorHelloWorld/bin/Release/net10.0/linux-x64/publish/Microsoft.AspNetCore.Components.QuickGrid.dll
+/home/tollavdmerwe/Coding/C#/BlazorHelloWorld/bin/Release/net10.0/linux-x64/publish/libLexActivator.so
+/home/tollavdmerwe/Coding/C#/BlazorHelloWorld/bin/Release/net10.0/linux-x64/publish/BlazorHelloWorld.deps.json

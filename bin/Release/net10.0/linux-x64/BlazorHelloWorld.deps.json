@@ -1,0 +1,63 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v10.0/linux-x64",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v10.0": {},
+    ".NETCoreApp,Version=v10.0/linux-x64": {
+      "BlazorHelloWorld/1.0.0": {
+        "dependencies": {
+          "Cryptlex.LexActivator": "3.41.0",
+          "Microsoft.AspNetCore.Components.QuickGrid": "10.0.5"
+        },
+        "runtime": {
+          "BlazorHelloWorld.dll": {}
+        }
+      },
+      "Cryptlex.LexActivator/3.41.0": {
+        "runtime": {
+          "lib/netstandard2.0/Cryptlex.LexActivator.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        },
+        "native": {
+          "runtimes/linux-x64/native/libLexActivator.so": {
+            "fileVersion": "0.0.0.0"
+          }
+        }
+      },
+      "Microsoft.AspNetCore.Components.QuickGrid/10.0.5": {
+        "runtime": {
+          "lib/net10.0/Microsoft.AspNetCore.Components.QuickGrid.dll": {
+            "assemblyVersion": "10.0.5.0",
+            "fileVersion": "10.0.526.15411"
+          }
+        }
+      }
+    }
+  },
+  "libraries": {
+    "BlazorHelloWorld/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Cryptlex.LexActivator/3.41.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-CUqLmNOnF1QXFpYrX3CDWS3ZW0J5DacRgSULl3pKqrwDqDlcL9oX9Ycq6n1JB/9g0EjGfSA8C7tPKKlVDti+oQ==",
+      "path": "cryptlex.lexactivator/3.41.0",
+      "hashPath": "cryptlex.lexactivator.3.41.0.nupkg.sha512"
+    },
+    "Microsoft.AspNetCore.Components.QuickGrid/10.0.5": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-8wpq9liUp/C2SQXBaAH7qUcLDJSiShEMUNyO72dgMw37bZJDm2ZJbxh6iNhauhIBukfZmts11BrQyyuqTdcLLw==",
+      "path": "microsoft.aspnetcore.components.quickgrid/10.0.5",
+      "hashPath": "microsoft.aspnetcore.components.quickgrid.10.0.5.nupkg.sha512"
+    }
+  }
+}

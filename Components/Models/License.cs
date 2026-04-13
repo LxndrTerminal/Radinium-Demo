@@ -7,5 +7,6 @@ namespace BlazorHelloWorld.Components.Models
 	[Required]
         public string productId { get; set; }
 	public string? id { get; set; }
+	public string? key { get; set; }
     }
 }

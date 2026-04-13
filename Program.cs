@@ -2,19 +2,21 @@ using BlazorHelloWorld.Components;
 
 var builder = WebApplication.CreateBuilder(args);
 
-//Using PAT
-builder.Configuration.AddUserSecrets<Program>();
+// Using PAT
+// builder.Configuration.AddUserSecrets<Program>();
 
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
+builder.Services.AddSingleton<LicenseService>();
+
 builder.Services.AddScoped<AuthState>();
 
-var pat = builder.Configuration["Dev:PersonalAccessToken"];
-if (!string.IsNullOrEmpty(pat))
-{
+ var pat = builder.Configuration["Dev:PersonalAccessToken"];
+ if (!string.IsNullOrEmpty(pat))
+ {
     builder.Services.AddScoped(sp => new AuthState { AccessToken = pat });
-}
+ }
 
 builder.Services.AddHttpClient("ApiClient", c =>
 {
