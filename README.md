@@ -39,6 +39,7 @@ This project uses **local user secrets** to store sensitive credentials:
 - .NET 10 SDK
 - Visual Studio 2022 or Visual Studio Code
 - Cryptlex account with API access
+- Cryptlex.LexActivator package
 
 ### Setup
 
@@ -46,3 +47,8 @@ This project uses **local user secrets** to store sensitive credentials:
    ```bash
    git clone https://github.com/LxndrTerminal/Radinium-Demo.git
    cd Radinium-Demo
+2. **Create user secret for your Personal Access Token (PLEASE NOTE: get your PAT in [Cryptlex Portal](https://app.cryptlex.com/home/overview) under Development tab - Access Tokens - Create - Tick all permissions - Copy PAT)**
+   ```bash
+   dotnet user-secrets Dev:PersonalAccessToken "YOUR-PERSONAL-ACCESS-TOKEN"
+   
+   
