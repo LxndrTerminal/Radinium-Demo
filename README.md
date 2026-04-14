@@ -23,7 +23,6 @@ This project fulfills the interview requirement to develop a desktop application
 - **Product Management**: Create and manage up to three products
 - **License Activation**: Activate licenses with Cryptlex API
 - **Key Generation**: Generate and manage license keys
-- **Data Persistence**: Supports both JSON file storage and database options
 - **Secure Authentication**: PAT (Personal Access Token) managed via user secrets (not committed to repository)
 
 ## 🔒 Security
