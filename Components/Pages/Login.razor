@@ -1,0 +1,21 @@
+@page "/login"
+@rendermode InteractiveServer
+@inject AuthState AuthState
+@inject ApiClient Api
+@layout EmptyLayout
+
+<PageTitle></PageTitle>
+
+Please Login
+
+<InputText @bind-Value="pat">PersonalAccessTOken</InputText>
+
+<button>Login</button>
+
+@code
+{
+    private string? pat { get; set; }
+
+    
+
+}
